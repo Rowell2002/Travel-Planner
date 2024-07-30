@@ -50,6 +50,23 @@ private void findPathsDfs(String current, String end, Set<String> visited, List<
 
 
 }
+
+public PathWithDistance shortestPath(String start, String end) {
+    Map<String, Integer> distances = new HashMap<>();
+    Map<String, String> previousNodes = new HashMap<>();
+    PriorityQueue<Node> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(node -> node.distance));
+
+    for (String vertex : adjacencyList.keySet()) {
+        if (vertex.equals(start)) {
+            distances.put(vertex, 0);
+            priorityQueue.add(new Node(vertex, 0));
+        } else {
+            distances.put(vertex, Integer.MAX_VALUE);
+            priorityQueue.add(new Node(vertex, Integer.MAX_VALUE));
+        }
+        previousNodes.put(vertex, null);
+    }
+}
 public class PDSACW {
     
 }
