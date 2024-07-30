@@ -21,6 +21,34 @@ class Graph {
         this.placesOfInterest.putIfAbsent(node, new ArrayList<>());
         this.placesOfInterest.get(node).add(place);
     }
+    
+    public List<PathWithDistance> findAllPaths(String start, String end) {
+    List<PathWithDistance> paths = new ArrayList<>();
+    List<String> currentPath = new ArrayList<>();
+    Set<String> visited = new HashSet<>();
+    findPathsDfs(start, end, visited, currentPath, paths, 0);
+    return paths;
+}
+
+private void findPathsDfs(String current, String end, Set<String> visited, List<String> currentPath, List<PathWithDistance> paths, int currentDistance) {
+    visited.add(current);
+    currentPath.add(current);
+
+    if (current.equals(end)) {
+        paths.add(new PathWithDistance(new ArrayList<>(currentPath), currentDistance));
+    } else {
+        for (Edge edge : adjacencyList.get(current)) {
+            if (!visited.contains(edge.destination)) {
+                findPathsDfs(edge.destination, end, visited, currentPath, paths, currentDistance + edge.weight);
+            }
+        }
+    }
+
+    currentPath.remove(currentPath.size() - 1);
+    visited.remove(current);
+}
+
+
 }
 public class PDSACW {
     
