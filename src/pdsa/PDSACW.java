@@ -83,9 +83,23 @@ public PathWithDistance shortestPath(String start, String end) {
             return new PathWithDistance(path, totalDistance);
         }
 
+        for (Edge edge : adjacencyList.get(currentVertex)) {
+            String neighbor = edge.destination;
+            int newDist = distances.get(currentVertex) + edge.weight;
 
+            if (newDist < distances.get(neighbor)) {
+                distances.put(neighbor, newDist);
+                previousNodes.put(neighbor, currentVertex);
+                priorityQueue.add(new Node(neighbor, newDist));
+            }
+        }
+    }
 
+        return new PathWithDistance(Collections.emptyList(), 0); // Return empty path with 0 distance if no path is found
 }
+
+
+
 public class PDSACW {
     
 }
