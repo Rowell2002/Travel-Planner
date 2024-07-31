@@ -66,6 +66,25 @@ public PathWithDistance shortestPath(String start, String end) {
         }
         previousNodes.put(vertex, null);
     }
+
+    while (!priorityQueue.isEmpty()) {
+        Node currentNode = priorityQueue.poll();
+        String currentVertex = currentNode.vertex;
+
+        if (currentVertex.equals(end)) {
+            List<String> path = new ArrayList<>();
+            int totalDistance = distances.get(currentVertex);
+            while (previousNodes.get(currentVertex) != null) {
+                path.add(currentVertex);
+                currentVertex = previousNodes.get(currentVertex);
+            }
+            path.add(start);
+            Collections.reverse(path);
+            return new PathWithDistance(path, totalDistance);
+        }
+
+
+
 }
 public class PDSACW {
     
