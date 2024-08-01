@@ -165,6 +165,20 @@ static class PathWithDistance {
         graph.addEdge("D", "Z", 6);
         graph.addEdge("E", "Z", 3);
 
+        // Adding places of interest
+        graph.addPlaceOfInterest("A", "Museum A");
+        graph.addPlaceOfInterest("B", "Park B");
+        graph.addPlaceOfInterest("C", "Cafe C");
+        graph.addPlaceOfInterest("D", "Library D");
+        graph.addPlaceOfInterest("E", "Gallery E");
+        graph.addPlaceOfInterest("Z", "Monument Z");
+
+        // Display all places of interest
+        System.out.println("Places of interest:");
+        for (Map.Entry<String, List<String>> entry : graph.placesOfInterest.entrySet()) {
+            System.out.println(entry.getKey() + ": " + String.join(", ", entry.getValue()));
+        }
+
 
 public class PDSACW {
     
