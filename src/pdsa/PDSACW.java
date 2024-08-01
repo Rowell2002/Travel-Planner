@@ -139,6 +139,16 @@ static class Edge {
     }
 }
 
+static class PathWithDistance {
+    List<String> path;
+    int distance;
+
+    PathWithDistance(List<String> path, int distance) {
+        this.path = path;
+        this.distance = distance;
+    }
+}
+
 
 public class PDSACW {
     
