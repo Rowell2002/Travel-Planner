@@ -101,20 +101,20 @@ public PathWithDistance shortestPath(String start, String end) {
 }
 
 private void findPathsThroughInterestsDfs(String current, List<String> interestPoints, String end, Set<String> visited, List<String> currentPath, List<PathWithDistance> validPaths, int currentDistance, int interestIndex) {
-        if (interestIndex < interestPoints.size() && current.equals(interestPoints.get(interestIndex))) {
-            interestIndex++;
-        }
-        if (current.equals(end) && interestIndex == interestPoints.size()) {
-            validPaths.add(new PathWithDistance(new ArrayList<>(currentPath), currentDistance));
-            return;
-        }
-        for (Edge edge : adjacencyList.get(current)) {
-            if (!visited.contains(edge.destination)) {
-                visited.add(edge.destination);
-                currentPath.add(edge.destination);
-                findPathsThroughInterestsDfs(edge.destination, interestPoints, end, visited, currentPath, validPaths, currentDistance + edge.weight, interestIndex);
-                currentPath.remove(currentPath.size() - 1);
-                visited.remove(edge.destination);
+    if (interestIndex < interestPoints.size() && current.equals(interestPoints.get(interestIndex))) {
+    interestIndex++;
+    }
+    if (current.equals(end) && interestIndex == interestPoints.size()) {
+        validPaths.add(new PathWithDistance(new ArrayList<>(currentPath), currentDistance));
+        return;
+    }
+    for (Edge edge : adjacencyList.get(current)) {
+        if (!visited.contains(edge.destination)) {
+            visited.add(edge.destination);
+            currentPath.add(edge.destination);
+            findPathsThroughInterestsDfs(edge.destination, interestPoints, end, visited, currentPath, validPaths, currentDistance + edge.weight, interestIndex);
+            currentPath.remove(currentPath.size() - 1);
+            visited.remove(edge.destination);
         }
     }
 }
