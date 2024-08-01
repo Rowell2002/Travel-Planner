@@ -115,9 +115,30 @@ private void findPathsThroughInterestsDfs(String current, List<String> interestP
                 findPathsThroughInterestsDfs(edge.destination, interestPoints, end, visited, currentPath, validPaths, currentDistance + edge.weight, interestIndex);
                 currentPath.remove(currentPath.size() - 1);
                 visited.remove(edge.destination);
-            }
         }
     }
+}
+
+static class Node {
+    String vertex;
+    int distance;
+
+    Node(String vertex, int distance) {
+        this.vertex = vertex;
+        this.distance = distance;
+    }
+}
+
+static class Edge {
+    String destination;
+    int weight;
+
+    Edge(String destination, int weight) {
+        this.destination = destination;
+        this.weight = weight;
+    }
+}
+
 
 public class PDSACW {
     
