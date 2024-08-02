@@ -150,34 +150,50 @@ static class PathWithDistance {
 }
 
  public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
-        Graph graph = new Graph();
+    Graph graph = new Graph();
 
-        // Example edges
-        graph.addEdge("A", "B", 4);
-        graph.addEdge("A", "C", 2);
-        graph.addEdge("B", "C", 1);
-        graph.addEdge("B", "D", 5);
-        graph.addEdge("C", "D", 8);
-        graph.addEdge("C", "E", 10);
-        graph.addEdge("D", "E", 2);
-        graph.addEdge("D", "Z", 6);
-        graph.addEdge("E", "Z", 3);
+    // Example edges
+    graph.addEdge("A", "B", 4);
+    graph.addEdge("A", "C", 2);
+    graph.addEdge("B", "C", 1);
+    graph.addEdge("B", "D", 5);
+    graph.addEdge("C", "D", 8);
+    graph.addEdge("C", "E", 10);
+    graph.addEdge("D", "E", 2);
+    graph.addEdge("D", "Z", 6);
+    graph.addEdge("E", "Z", 3);
 
-        // Adding places of interest
-        graph.addPlaceOfInterest("A", "Museum A");
-        graph.addPlaceOfInterest("B", "Park B");
-        graph.addPlaceOfInterest("C", "Cafe C");
-        graph.addPlaceOfInterest("D", "Library D");
-        graph.addPlaceOfInterest("E", "Gallery E");
-        graph.addPlaceOfInterest("Z", "Monument Z");
+    // Adding places of interest
+    graph.addPlaceOfInterest("A", "Museum A");
+    graph.addPlaceOfInterest("B", "Park B");
+    graph.addPlaceOfInterest("C", "Cafe C");
+    graph.addPlaceOfInterest("D", "Library D");
+    graph.addPlaceOfInterest("E", "Gallery E");
+    graph.addPlaceOfInterest("Z", "Monument Z");
 
-        // Display all places of interest
-        System.out.println("Places of interest:");
-        for (Map.Entry<String, List<String>> entry : graph.placesOfInterest.entrySet()) {
-            System.out.println(entry.getKey() + ": " + String.join(", ", entry.getValue()));
-        }
+    // Display all places of interest
+    System.out.println("Places of interest:");
+    for (Map.Entry<String, List<String>> entry : graph.placesOfInterest.entrySet()) {
+        System.out.println(entry.getKey() + ": " + String.join(", ", entry.getValue()));
+    }
+
+System.out.print("Enter source city: ");
+    String source = scanner.nextLine();
+
+    System.out.print("Enter destination city: ");
+    String destination = scanner.nextLine();
+
+    System.out.println("Enter places of interest to visit (separated by commas): ");
+    String[] interests = scanner.nextLine().split(",");
+    List<String> interestPoints = new ArrayList<>();
+    for (String interest : interests) {
+        interestPoints.add(interest.trim());
+    }
+
+
+
 
 
 public class PDSACW {
