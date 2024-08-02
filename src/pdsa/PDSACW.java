@@ -192,7 +192,20 @@ System.out.print("Enter source city: ");
         interestPoints.add(interest.trim());
     }
 
+     // Find all paths
+     List<PathWithDistance> allPaths = graph.findAllPaths(source, destination);
 
+     if (!allPaths.isEmpty()) {
+         System.out.println("All possible paths from " + source + " to " + destination + " are:");
+         for (int i = 0; i < allPaths.size(); i++) {
+             PathWithDistance pathWithDistance = allPaths.get(i);
+             System.out.println((i + 1) + ": " + String.join(" -> ", pathWithDistance.path) + " (Distance: " + pathWithDistance.distance + ")");
+         }
+
+         // Find the shortest path
+         PathWithDistance shortestPath = graph.shortestPath(source, destination);
+         System.out.println("Shortest path from " + source + " to " + destination + " is: " + String.join(" -> ", shortestPath.path) + " (Distance: " + shortestPath.distance + ")");
+        }
 
 
 
