@@ -1,8 +1,7 @@
 import java.util.*;
-import java.util.List;
 
 //import org.w3c.dom.Node;
-package pdsa;
+//package pdsa;
 
 class Graph {
     private final Map<String, List<Edge>> adjacencyList;
@@ -206,15 +205,40 @@ System.out.print("Enter source city: ");
          // Find the shortest path
          PathWithDistance shortestPath = graph.shortestPath(source, destination);
          System.out.println("Shortest path from " + source + " to " + destination + " is: " + String.join(" -> ", shortestPath.path) + " (Distance: " + shortestPath.distance + ")");
-        }
+     }
 
- // Find the path through selected places of interest
-            PathWithDistance pathWithInterestPoints = graph.pathThroughInterestPoints(source, interestPoints, destination);
-            if (!pathWithInterestPoints.path.isEmpty()) {
-                System.out.println("Path from " + source + " to " + destination + " via places of interest is: " + String.join(" -> ", pathWithInterestPoints.path) + " (Distance: " + pathWithInterestPoints.distance + ")");
-            } else {
-                System.out.println("No path found through the specified places of interest.");
-            }
+     // Find the path through selected places of interest
+     PathWithDistance pathWithInterestPoints = graph.pathThroughInterestPoints(source, interestPoints, destination);
+     if (!pathWithInterestPoints.path.isEmpty()) {
+         System.out.println("Path from " + source + " to " + destination + " via places of interest is: " + String.join(" -> ", pathWithInterestPoints.path) + " (Distance: " + pathWithInterestPoints.distance + ")");
+     } else {
+         System.out.println("No path found through the specified places of interest.");
+     }
+
+     // Let the user select a path
+     System.out.print("Select a path (1-" + allPaths.size() + "): ");
+     int selectedIndex = scanner.nextInt() - 1;
+
+     if (selectedIndex >= 0 && selectedIndex < allPaths.size()) {
+         PathWithDistance selectedPath = allPaths.get(selectedIndex);
+         System.out.println("You have selected the path: " + String.join(" -> ", selectedPath.path));
+         System.out.println("Places you can visit along this path:");
+         for (String node : selectedPath.path) {
+             System.out.println(node + ": " + String.join(", ", graph.placesOfInterest.getOrDefault(node, Collections.emptyList())));
+         }
+     } 
+     else {
+         System.out.println("Invalid selection.");
+     }
+ }
+    else {
+     System.out.println("No path found from " + source + " to " + destination);
+    }
+}
+}
+
+
+
 
 
 
