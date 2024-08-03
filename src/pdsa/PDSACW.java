@@ -1,7 +1,8 @@
 import java.util.*;
+import java.util.List;
 
-import org.w3c.dom.Node;
-//package pdsa;
+//import org.w3c.dom.Node;
+package pdsa;
 
 class Graph {
     private final Map<String, List<Edge>> adjacencyList;
@@ -206,6 +207,14 @@ System.out.print("Enter source city: ");
          PathWithDistance shortestPath = graph.shortestPath(source, destination);
          System.out.println("Shortest path from " + source + " to " + destination + " is: " + String.join(" -> ", shortestPath.path) + " (Distance: " + shortestPath.distance + ")");
         }
+
+ // Find the path through selected places of interest
+            PathWithDistance pathWithInterestPoints = graph.pathThroughInterestPoints(source, interestPoints, destination);
+            if (!pathWithInterestPoints.path.isEmpty()) {
+                System.out.println("Path from " + source + " to " + destination + " via places of interest is: " + String.join(" -> ", pathWithInterestPoints.path) + " (Distance: " + pathWithInterestPoints.distance + ")");
+            } else {
+                System.out.println("No path found through the specified places of interest.");
+            }
 
 
 
