@@ -381,5 +381,26 @@ public static void main(String[] args) {
                 System.out.println(" ");
                 System.out.println("* End of option *");
                 break;
+                
+            case 4:
+                System.out.print("Enter source city: ");
+                source = scanner.nextLine();
+                System.out.print("Enter destination city: ");
+                destination = scanner.nextLine();
+                System.out.println("Enter places of interest to visit (separated by commas): ");
+                String[] interests = scanner.nextLine().split(",");
+                List<String> interestPoints = new ArrayList<>();
+                for (String interest : interests) {
+                    interestPoints.add(interest.trim());
+                }
+                PathWithDistance pathWithInterestPoints = graph.pathThroughInterestPoints(source, interestPoints, destination);
+                if (!pathWithInterestPoints.path.isEmpty()) {
+                    System.out.println("Path from " + source + " to " + destination + " via places of interest is: " + String.join(" -> ", pathWithInterestPoints.path) + " (Distance: " + pathWithInterestPoints.distance + ")");
+                } else {
+                    System.out.println("No path found through the specified places of interest.");
+                }
+                System.out.println(" ");
+                System.out.println("* End of paths list through your places of interest *");
+                break;
     }
 }
