@@ -1,14 +1,16 @@
 import java.util.*;
 
 class Graph {
-    final Map<String, List<Edge>> adjacencyList;
-    final Map<String, List<String>> placesOfInterest;
+    final Map<String, List<Edge>> adjacencyList;    // Initialize adjacency list to store graph edges
+    final Map<String, List<String>> placesOfInterest;    // Intialize map to store places of interest for each node
 
+    // Constructor to initialize the adjacency list and map
     public Graph() {
         this.adjacencyList = new HashMap<>();
         this.placesOfInterest = new HashMap<>();
     }
 
+    // Method to add an edge between two nodes with a specified weight
     public void addEdge(String source, String destination, int weight) {
         this.adjacencyList.putIfAbsent(source, new ArrayList<>());
         this.adjacencyList.putIfAbsent(destination, new ArrayList<>());
@@ -16,11 +18,13 @@ class Graph {
         this.adjacencyList.get(destination).add(new Edge(source, weight));
     }
 
+    // Method to add a place of interest to a specific node
     public void addPlaceOfInterest(String node, String place) {
         this.placesOfInterest.putIfAbsent(node, new ArrayList<>());
         this.placesOfInterest.get(node).add(place);
     }
 
+    // Method to find all paths from start node to end node
     public List<PathWithDistance> findAllPaths(String start, String end) {
         List<PathWithDistance> paths = new ArrayList<>();
         List<String> currentPath = new ArrayList<>();
@@ -29,6 +33,7 @@ class Graph {
         return paths;
     }
 
+    // Method to perform DFS and find all paths
     private void findPathsDfs(String current, String end, Set<String> visited, List<String> currentPath, List<PathWithDistance> paths, int currentDistance) {
         visited.add(current);
         currentPath.add(current);
@@ -47,6 +52,7 @@ class Graph {
         visited.remove(current);
     }
 
+    // Method to find the shortest path from start node to end node
     public PathWithDistance shortestPath(String start, String end) {
         Map<String, Integer> distances = new HashMap<>();
         Map<String, String> previousNodes = new HashMap<>();
@@ -94,6 +100,7 @@ class Graph {
         return new PathWithDistance(Collections.emptyList(), 0); // Return empty path with 0 distance if no path is found
     }
 
+    // Method to find a path through interest points
     public PathWithDistance pathThroughInterestPoints(String start, List<String> interestPoints, String end) {
         List<String> currentPath = new ArrayList<>();
         Set<String> visited = new HashSet<>();
@@ -104,13 +111,14 @@ class Graph {
 
         findPathsThroughInterestsDfs(start, interestPoints, end, visited, currentPath, validPaths, 0, 0);
 
-        // Return the first valid path found (not necessarily the shortest)
+        // Return the first valid path found
         if (!validPaths.isEmpty()) {
             return validPaths.get(0);
         }
         return new PathWithDistance(Collections.emptyList(), 0);
     }
 
+    // Method to perform DFS and find paths through specified places of interest
     private void findPathsThroughInterestsDfs(String current, List<String> interestPoints, String end, Set<String> visited, List<String> currentPath, List<PathWithDistance> validPaths, int currentDistance, int interestIndex) {
         if (interestIndex < interestPoints.size() && current.equals(interestPoints.get(interestIndex))) {
             interestIndex++;
@@ -130,6 +138,7 @@ class Graph {
         }
     }
 
+    // Method to find paths from start to end with a maximum distance
     public List<PathWithDistance> findPathsMaxDistance(String start, String end, int maxDistance) {
         List<PathWithDistance> paths = new ArrayList<>();
         List<String> currentPath = new ArrayList<>();
@@ -138,6 +147,7 @@ class Graph {
         return paths;
     }
 
+    // Method to perform DFS and find paths with a maximum distance
     private void findPathsMaxDistanceDfs(String current, String end, Set<String> visited, List<String> currentPath, List<PathWithDistance> paths, int currentDistance, int maxDistance) {
         visited.add(current);
         currentPath.add(current);
@@ -156,6 +166,7 @@ class Graph {
         visited.remove(current);
     }
 
+    // Method to find the path with the minimum number of stops
     public PathWithStops findPathWithMinStops(String start, String end) {
     List<PathWithStops> allPaths = new ArrayList<>();
     List<String> currentPath = new ArrayList<>();
@@ -177,6 +188,7 @@ class Graph {
     return minStopsPath;
 }
 
+// Method to perform DFS and find paths with minimum stops
 private void findPathsMinStopsDfs(String current, String end, Set<String> visited, List<String> currentPath, List<PathWithStops> paths, int stops) {
     visited.add(current);
     currentPath.add(current);
@@ -195,6 +207,7 @@ private void findPathsMinStopsDfs(String current, String end, Set<String> visite
     visited.remove(current);
 }
 
+    // Method to find a path avoiding specified nodes
     public PathWithDistance pathAvoidingNodes(String start, String end, Set<String> nodesToAvoid) {
         Map<String, Integer> distances = new HashMap<>();
         Map<String, String> previousNodes = new HashMap<>();
@@ -253,6 +266,7 @@ private void findPathsMinStopsDfs(String current, String end, Set<String> visite
     throw new UnsupportedOperationException("Not supported yet."); 
 }
 
+// Class representing a node with a vertex and distance
 static class Node {
     String vertex;
     int distance;
@@ -263,6 +277,7 @@ static class Node {
     }
 }
 
+// Class representing an edge with a destination node and weight
 static class Edge {
     String destination;
     int weight;
@@ -273,6 +288,7 @@ static class Edge {
     }
 }
 
+// Class representing a path with a list of nodes and the total distance
 static class PathWithDistance {
     List<String> path;
     int distance;
@@ -283,6 +299,8 @@ static class PathWithDistance {
     }
 }
 
+
+// Class representing a path with a list of nodes and the number of stops
 static class PathWithStops {
     List<String> path;
     int stops;
@@ -439,5 +457,25 @@ public static void main(String[] args) {
                 System.out.println("* End of option *");
                 break;
         
+            case 7:
+                System.out.print("Enter source city: ");
+                source = scanner.nextLine();
+                System.out.print("Enter destination city: ");
+                destination = scanner.nextLine();
+                System.out.print("Enter nodes to avoid (separated by commas): ");
+                String[] avoidNodes = scanner.nextLine().split(",");
+                Set<String> nodesToAvoid = new HashSet<>();
+                for (String node : avoidNodes) {
+                    nodesToAvoid.add(node.trim());
+                }
+                PathWithDistance pathAvoidingNodes = graph.pathAvoidingNodes(source, destination, nodesToAvoid);
+                if (!pathAvoidingNodes.path.isEmpty()) {
+                    System.out.println("Path from " + source + " to " + destination + " avoiding " + nodesToAvoid + " is: " + String.join(" -> ", pathAvoidingNodes.path) + " (Distance: " + pathAvoidingNodes.distance + ")");
+                } else {
+                    System.out.println("No path found avoiding the specified places(cities).");
+                }
+                System.out.println(" ");
+                System.out.println("* End of paths list avoiding your specified locations *");
+                break;
     }
 }
