@@ -348,6 +348,60 @@ public static void main(String[] args) {
                 System.out.println(" ");
                 System.out.println("* End of place list *");
                 break;
+                
+            case 2:
+                System.out.print("Enter source city: ");
+                String source = scanner.nextLine();
+                System.out.print("Enter destination city: ");
+                String destination = scanner.nextLine();
+                List<PathWithDistance> allPaths = graph.findAllPaths(source, destination);
+                if (!allPaths.isEmpty()) {
+                    System.out.println(" ");
+                    System.out.println("All possible paths from " + source + " to " + destination + " are:");
+                    System.out.println("-----------------------------------------------");
+                    for (int i = 0; i < allPaths.size(); i++) {
+                        PathWithDistance pathWithDistance = allPaths.get(i);
+                        System.out.println((i + 1) + ": " + String.join(" -> ", pathWithDistance.path) + " (Distance: " + pathWithDistance.distance + ")");
+                    }
+                } else {
+                    System.out.println(" ");
+                    System.out.println("! No path found from " + source + " to " + destination);
+                }
+                System.out.println(" ");
+                System.out.println("* End of paths list *");
+                break;
+
+            case 3:
+                System.out.print("Enter source city: ");
+                source = scanner.nextLine();
+                System.out.print("Enter destination city: ");
+                destination = scanner.nextLine();
+                PathWithDistance shortestPath = graph.shortestPath(source, destination);
+                System.out.println("Shortest path from " + source + " to " + destination + " is: " + String.join(" -> ", shortestPath.path) + " (Distance: " + shortestPath.distance + ")");
+                System.out.println(" ");
+                System.out.println("* End of option *");
+                break;
+
+            case 4:
+                System.out.print("Enter source city: ");
+                source = scanner.nextLine();
+                System.out.print("Enter destination city: ");
+                destination = scanner.nextLine();
+                System.out.println("Enter places of interest to visit (separated by commas): ");
+                String[] interests = scanner.nextLine().split(",");
+                List<String> interestPoints = new ArrayList<>();
+                for (String interest : interests) {
+                    interestPoints.add(interest.trim());
+                }
+                PathWithDistance pathWithInterestPoints = graph.pathThroughInterestPoints(source, interestPoints, destination);
+                if (!pathWithInterestPoints.path.isEmpty()) {
+                    System.out.println("Path from " + source + " to " + destination + " via places of interest is: " + String.join(" -> ", pathWithInterestPoints.path) + " (Distance: " + pathWithInterestPoints.distance + ")");
+                } else {
+                    System.out.println("No path found through the specified places of interest.");
+                }
+                System.out.println(" ");
+                System.out.println("* End of paths list through your places of interest *");
+                break;
         
     }
 }
