@@ -370,5 +370,16 @@ public static void main(String[] args) {
                 System.out.println(" ");
                 System.out.println("* End of paths list *");
                 break;
+                
+            case 3:
+                System.out.print("Enter source city: ");
+                source = scanner.nextLine();
+                System.out.print("Enter destination city: ");
+                destination = scanner.nextLine();
+                PathWithDistance shortestPath = graph.shortestPath(source, destination);
+                System.out.println("Shortest path from " + source + " to " + destination + " is: " + String.join(" -> ", shortestPath.path) + " (Distance: " + shortestPath.distance + ")");
+                System.out.println(" ");
+                System.out.println("* End of option *");
+                break;
     }
 }
