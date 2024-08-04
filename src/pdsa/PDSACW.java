@@ -292,3 +292,21 @@ static class PathWithStops {
         this.stops = stops;
     }
 }
+
+public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+
+    Graph graph = new Graph();
+
+    // Example edges
+    graph.addEdge("Negombo", "Marawila", 4);
+    graph.addEdge("Negombo", "Kuliyapitiya", 2);
+    graph.addEdge("Marawila", "Kuliyapitiya", 1);
+    graph.addEdge("Marawila", "Kurunagala", 5);
+    graph.addEdge("Kuliyapitiya", "Kurunagala", 8);
+    graph.addEdge("Kuliyapitiya", "Galagedara", 10);
+    graph.addEdge("Kurunagala", "Galagedara", 2);
+    graph.addEdge("Kurunagala", "Kandy", 6);
+    graph.addEdge("Galagedara", "Kandy", 3);
+
+}
