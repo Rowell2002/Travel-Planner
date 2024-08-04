@@ -348,5 +348,39 @@ public static void main(String[] args) {
                 System.out.println(" ");
                 System.out.println("* End of place list *");
                 break;
+
+                switch (choice) {
+                    case 1:
+                        System.out.println("Places of interest:");
+                        System.out.println(" ");
+                        System.out.printf("%-10s %-20s\n", "  City", "      Places of Interest");
+                        for (Map.Entry<String, List<String>> entry : graph.placesOfInterest.entrySet()) {
+                            System.out.println(entry.getKey() + ": " + String.join(", ", entry.getValue()));
+                        }
+                        System.out.println(" ");
+                        System.out.println("* End of place list *");
+                        break;
+        
+                    case 2:
+                        System.out.print("Enter source city: ");
+                        String source = scanner.nextLine();
+                        System.out.print("Enter destination city: ");
+                        String destination = scanner.nextLine();
+                        List<PathWithDistance> allPaths = graph.findAllPaths(source, destination);
+                        if (!allPaths.isEmpty()) {
+                            System.out.println(" ");
+                            System.out.println("All possible paths from " + source + " to " + destination + " are:");
+                            System.out.println("-----------------------------------------------");
+                            for (int i = 0; i < allPaths.size(); i++) {
+                                PathWithDistance pathWithDistance = allPaths.get(i);
+                                System.out.println((i + 1) + ": " + String.join(" -> ", pathWithDistance.path) + " (Distance: " + pathWithDistance.distance + ")");
+                            }
+                        } else {
+                            System.out.println(" ");
+                            System.out.println("! No path found from " + source + " to " + destination);
+                        }
+                        System.out.println(" ");
+                        System.out.println("* End of paths list *");
+                        break;
     }
 }
