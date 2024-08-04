@@ -316,6 +316,26 @@ public static void main(String[] args) {
     graph.addPlaceOfInterest("Kurunagala", "      Kurunagala lake");
     graph.addPlaceOfInterest("Galagedara", "      RIVER BANK resort");
     graph.addPlaceOfInterest("Knady", "           Sri Dalada Maligawa");
+    
+    while (true) {
+        System.out.println(" ");
+        System.out.println("----------------WELCOME-----------------");
+        System.out.println("*** Select the option of your choice ***");
+        System.out.println("----------------------------------------");
+        System.out.println("1. Display all places on map");
+        System.out.println("2. Find all paths from source to destination");
+        System.out.println("3. Find shortest path from source to destination");
+        System.out.println("4. Find path through selected places of interest");
+        System.out.println("5. Find paths with maximum distance");
+        System.out.println("6. Find the path with minimum number of stops");
+        System.out.println("7. Find path avoiding certain places(cities)");
+        System.out.println("8. Exit");
+        System.out.println("0. Help");
+        System.out.println(" ");
+        System.out.print("Enter your choice: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
+        System.out.println("-----------------");
 
     }
 }
