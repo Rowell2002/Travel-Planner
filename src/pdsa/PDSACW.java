@@ -423,6 +423,21 @@ public static void main(String[] args) {
                 System.out.println(" ");
                 System.out.println("* End of option *");
                 break;
+                
+            case 6:
+                System.out.print("Enter source city: ");
+                source = scanner.nextLine();
+                System.out.print("Enter destination city: ");
+                destination = scanner.nextLine();
+                PathWithStops minStopsPath = graph.findPathWithMinStops(source, destination);
+                if (minStopsPath.stops < Integer.MAX_VALUE) {
+                    System.out.println("Path from " + source + " to " + destination + " with minimum number of stops is: " + String.join(" -> ", minStopsPath.path) + " (Stops: " + minStopsPath.stops + ")");
+                } else {
+                    System.out.println("No path found with minimum number of stops.");
+                }
+                System.out.println(" ");
+                System.out.println("* End of option *");
+                break;
         
     }
 }
