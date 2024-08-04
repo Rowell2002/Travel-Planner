@@ -309,4 +309,13 @@ public static void main(String[] args) {
     graph.addEdge("Kurunagala", "Kandy", 6);
     graph.addEdge("Galagedara", "Kandy", 3);
 
+    // Adding places of interest
+    graph.addPlaceOfInterest("Negombo", "         Lagoon");
+    graph.addPlaceOfInterest("Marawila", "        Hotel Amagi");
+    graph.addPlaceOfInterest("Kuliyapitiya", "    Ancient clock tower");
+    graph.addPlaceOfInterest("Kurunagala", "      Kurunagala lake");
+    graph.addPlaceOfInterest("Galagedara", "      RIVER BANK resort");
+    graph.addPlaceOfInterest("Knady", "           Sri Dalada Maligawa");
+
+    }
 }
