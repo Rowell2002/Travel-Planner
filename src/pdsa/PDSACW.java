@@ -337,5 +337,16 @@ public static void main(String[] args) {
         scanner.nextLine();  // Consume newline
         System.out.println("-----------------");
 
+        switch (choice) {
+            case 1:
+                System.out.println("Places of interest:");
+                System.out.println(" ");
+                System.out.printf("%-10s %-20s\n", "  City", "      Places of Interest");
+                for (Map.Entry<String, List<String>> entry : graph.placesOfInterest.entrySet()) {
+                    System.out.println(entry.getKey() + ": " + String.join(", ", entry.getValue()));
+                }
+                System.out.println(" ");
+                System.out.println("* End of place list *");
+                break;
     }
 }
