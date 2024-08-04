@@ -317,15 +317,15 @@ public static void main(String[] args) {
     Graph graph = new Graph();
 
     // Example edges
-    graph.addEdge("Negombo", "Marawila", 4);
-    graph.addEdge("Negombo", "Kuliyapitiya", 2);
-    graph.addEdge("Marawila", "Kuliyapitiya", 1);
-    graph.addEdge("Marawila", "Kurunagala", 5);
-    graph.addEdge("Kuliyapitiya", "Kurunagala", 8);
-    graph.addEdge("Kuliyapitiya", "Galagedara", 10);
-    graph.addEdge("Kurunagala", "Galagedara", 2);
-    graph.addEdge("Kurunagala", "Kandy", 6);
-    graph.addEdge("Galagedara", "Kandy", 3);
+    graph.addEdge("Negombo", "Marawila", 28);
+    graph.addEdge("Negombo", "Kuliyapitiya", 47);
+    graph.addEdge("Marawila", "Kuliyapitiya", 30);
+    graph.addEdge("Marawila", "Kurunagala", 69);
+    graph.addEdge("Kuliyapitiya", "Kurunagala", 39);
+    graph.addEdge("Kuliyapitiya", "Galagedara", 77);
+    graph.addEdge("Kurunagala", "Galagedara", 38);
+    graph.addEdge("Kurunagala", "Kandy", 43);
+    graph.addEdge("Galagedara", "Kandy", 20);
 
     // Adding places of interest
     graph.addPlaceOfInterest("Negombo", "         Lagoon");
@@ -395,6 +395,7 @@ public static void main(String[] args) {
                 System.out.print("Enter destination city: ");
                 destination = scanner.nextLine();
                 PathWithDistance shortestPath = graph.shortestPath(source, destination);
+                System.out.println(" ");
                 System.out.println("Shortest path from " + source + " to " + destination + " is: " + String.join(" -> ", shortestPath.path) + " (Distance: " + shortestPath.distance + ")");
                 System.out.println(" ");
                 System.out.println("* End of option *");
@@ -413,6 +414,7 @@ public static void main(String[] args) {
                 }
                 PathWithDistance pathWithInterestPoints = graph.pathThroughInterestPoints(source, interestPoints, destination);
                 if (!pathWithInterestPoints.path.isEmpty()) {
+                    System.out.println(" ");
                     System.out.println("Path from " + source + " to " + destination + " via places of interest is: " + String.join(" -> ", pathWithInterestPoints.path) + " (Distance: " + pathWithInterestPoints.distance + ")");
                 } else {
                     System.out.println("No path found through the specified places of interest.");
@@ -430,6 +432,7 @@ public static void main(String[] args) {
                 int maxDistance = scanner.nextInt();
                 List<PathWithDistance> maxDistancePaths = graph.findPathsMaxDistance(source, destination, maxDistance);
                 if (!maxDistancePaths.isEmpty()) {
+                    System.out.println(" ");
                     System.out.println("Paths from " + source + " to " + destination + " with a maximum distance of " + maxDistance + " are:");
                     for (int i = 0; i < maxDistancePaths.size(); i++) {
                         PathWithDistance pathWithDistance = maxDistancePaths.get(i);
@@ -449,6 +452,7 @@ public static void main(String[] args) {
                 destination = scanner.nextLine();
                 PathWithStops minStopsPath = graph.findPathWithMinStops(source, destination);
                 if (minStopsPath.stops < Integer.MAX_VALUE) {
+                    System.out.println(" ");
                     System.out.println("Path from " + source + " to " + destination + " with minimum number of stops is: " + String.join(" -> ", minStopsPath.path) + " (Stops: " + minStopsPath.stops + ")");
                 } else {
                     System.out.println("No path found with minimum number of stops.");
@@ -462,7 +466,7 @@ public static void main(String[] args) {
                 source = scanner.nextLine();
                 System.out.print("Enter destination city: ");
                 destination = scanner.nextLine();
-                System.out.print("Enter nodes to avoid (separated by commas): ");
+                System.out.print("Enter cities to avoid (separated by commas): ");
                 String[] avoidNodes = scanner.nextLine().split(",");
                 Set<String> nodesToAvoid = new HashSet<>();
                 for (String node : avoidNodes) {
@@ -470,6 +474,7 @@ public static void main(String[] args) {
                 }
                 PathWithDistance pathAvoidingNodes = graph.pathAvoidingNodes(source, destination, nodesToAvoid);
                 if (!pathAvoidingNodes.path.isEmpty()) {
+                    System.out.println(" ");
                     System.out.println("Path from " + source + " to " + destination + " avoiding " + nodesToAvoid + " is: " + String.join(" -> ", pathAvoidingNodes.path) + " (Distance: " + pathAvoidingNodes.distance + ")");
                 } else {
                     System.out.println("No path found avoiding the specified places(cities).");
@@ -477,5 +482,34 @@ public static void main(String[] args) {
                 System.out.println(" ");
                 System.out.println("* End of paths list avoiding your specified locations *");
                 break;
+                
+            case 8:
+                System.out.println("*** Thank you for using the Travel Planner by R & M ***");
+                System.out.println("                Have a safe journey !");
+                System.out.println("                     Good Bye !");
+                return;
+                
+            case 0:
+                System.out.println("Help Menu:");
+                System.out.println(" ");
+                System.out.println("1. Display all places of interest on the map -> Shows all nodes with their places of interest.");
+                System.out.println("2. Find all paths from source to destination -> Displays all possible paths between two cities.");
+                System.out.println("3. Find shortest path from source to destination -> Finds the shortest path between two cities.");
+                System.out.println("4. Find path through selected places of interest -> Finds a path that passes through specific places.");
+                System.out.println("5. Find paths with maximum distance -> Displays paths within a specified distance.");
+                System.out.println("6. Find the path with minimum number of stops -> Finds the path with the fewest stops.");
+                System.out.println("7. Find path avoiding certain places (cities) -> Finds a path that avoids specified cities.");
+                System.out.println("8. Exit -> Exits the application.");
+                System.out.println();
+                break;
+
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
+        System.out.println(" ");
+        System.out.println("Press enter to continue...");
+        scanner.nextLine(); // Wait for the user to hit enter
     }
 }
+}
+    
