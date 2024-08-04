@@ -402,6 +402,27 @@ public static void main(String[] args) {
                 System.out.println(" ");
                 System.out.println("* End of paths list through your places of interest *");
                 break;
+
+            case 5:
+                System.out.print("Enter source city: ");
+                source = scanner.nextLine();
+                System.out.print("Enter destination city: ");
+                destination = scanner.nextLine();
+                System.out.print("Enter maximum distance: ");
+                int maxDistance = scanner.nextInt();
+                List<PathWithDistance> maxDistancePaths = graph.findPathsMaxDistance(source, destination, maxDistance);
+                if (!maxDistancePaths.isEmpty()) {
+                    System.out.println("Paths from " + source + " to " + destination + " with a maximum distance of " + maxDistance + " are:");
+                    for (int i = 0; i < maxDistancePaths.size(); i++) {
+                        PathWithDistance pathWithDistance = maxDistancePaths.get(i);
+                        System.out.println((i + 1) + ": " + String.join(" -> ", pathWithDistance.path) + " (Distance: " + pathWithDistance.distance + ")");
+                    }
+                } else {
+                    System.out.println("No paths found within the specified distance.");
+                }
+                System.out.println(" ");
+                System.out.println("* End of option *");
+                break;
         
     }
 }
